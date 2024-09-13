@@ -59,10 +59,6 @@ namespace AssembleAssist
             }
         }
 
-        private void main_win_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void load_pnp_butt_Click(object sender, EventArgs e)
         {
@@ -85,11 +81,6 @@ namespace AssembleAssist
                 label_pnp_lines_loaded.ForeColor = Color.Red;
                 state &= ~2;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void load_asd_butt_Click(object sender, EventArgs e)

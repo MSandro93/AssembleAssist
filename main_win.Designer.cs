@@ -30,7 +30,6 @@
         {
             this.load_bom_butt = new System.Windows.Forms.Button();
             this.load_pnp_butt = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label_bom_lines_loaded = new System.Windows.Forms.Label();
             this.label_pnp_lines_loaded = new System.Windows.Forms.Label();
             this.load_asd_butt = new System.Windows.Forms.Button();
@@ -70,16 +69,6 @@
             this.load_pnp_butt.Text = "Load Pick and Place";
             this.load_pnp_butt.UseVisualStyleBackColor = true;
             this.load_pnp_butt.Click += new System.EventHandler(this.load_pnp_butt_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(978, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label_bom_lines_loaded
             // 
@@ -259,13 +248,11 @@
             this.Controls.Add(this.load_asd_butt);
             this.Controls.Add(this.label_pnp_lines_loaded);
             this.Controls.Add(this.label_bom_lines_loaded);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.load_pnp_butt);
             this.Controls.Add(this.load_bom_butt);
             this.KeyPreview = true;
             this.Name = "main_win";
             this.Text = "Assemble Assist";
-            this.Load += new System.EventHandler(this.main_win_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -277,7 +264,6 @@
 
         private System.Windows.Forms.Button load_bom_butt;
         private System.Windows.Forms.Button load_pnp_butt;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_bom_lines_loaded;
         private System.Windows.Forms.Label label_pnp_lines_loaded;
         private System.Windows.Forms.Button load_asd_butt;
