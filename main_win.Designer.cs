@@ -38,6 +38,7 @@
             this.butt_set_up_asd_origin_dimension = new System.Windows.Forms.Button();
             this.butt_start_assembly = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.butt_next_bom_line = new System.Windows.Forms.Button();
             this.butt_previous_bom_line = new System.Windows.Forms.Button();
             this.label_bom_line = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.label_current_component = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_cnt_in_bom_line = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -162,6 +162,15 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 147);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "BoM line";
+            // 
             // butt_next_bom_line
             // 
             this.butt_next_bom_line.Enabled = false;
@@ -238,15 +247,6 @@
             this.label_cnt_in_bom_line.TabIndex = 0;
             this.label_cnt_in_bom_line.Text = "/";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 147);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "BoM line";
-            // 
             // main_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,7 +264,7 @@
             this.Controls.Add(this.load_bom_butt);
             this.KeyPreview = true;
             this.Name = "main_win";
-            this.Text = "Form1";
+            this.Text = "Assemble Assist";
             this.Load += new System.EventHandler(this.main_win_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).EndInit();
             this.groupBox1.ResumeLayout(false);
