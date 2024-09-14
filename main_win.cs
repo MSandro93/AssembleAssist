@@ -210,6 +210,10 @@ namespace AssembleAssist
                 return;
             }
 
+            progressBar.Maximum = shared_data.pnp_list.Count;
+            progressBar.Minimum = 0;
+            progressBar.Value   = 0;
+            label_progress.Text = "0/" + shared_data.pnp_list.Count().ToString() + "  (0%)";
 
             current_bom_line = 1;
             current_comp_in_bom_line = 1;
@@ -362,6 +366,11 @@ namespace AssembleAssist
                         }
                 }
 
+                int cnt_placed = shared_data.howManyPlacedSkipped();
+                int percentage = Convert.ToInt32(Math.Round((cnt_placed / (shared_data.pnp_list.Count() * 1.0)) * 100));
+                label_progress.Text = cnt_placed.ToString() + "/" + shared_data.pnp_list.Count().ToString() + "  (" + percentage.ToString() + "%)";
+                progressBar.Value = cnt_placed;
+
                 return true;
             }
 
@@ -385,6 +394,11 @@ namespace AssembleAssist
                             break;
                         }
                 }
+
+                int cnt_placed = shared_data.howManyPlacedSkipped();
+                int percentage = Convert.ToInt32(Math.Round((cnt_placed / (shared_data.pnp_list.Count() * 1.0)) * 100));
+                label_progress.Text = cnt_placed.ToString() + "/" + shared_data.pnp_list.Count().ToString() + "  (" + percentage.ToString() + "%)";
+                progressBar.Value = cnt_placed;
             }
             
             return base.ProcessCmdKey(ref msg, keyData);
@@ -432,6 +446,5 @@ namespace AssembleAssist
         {
             probeComponent(current_designator);
         }
-
     }
 }

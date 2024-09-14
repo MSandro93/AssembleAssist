@@ -37,6 +37,7 @@
             this.butt_set_up_asd_origin_dimension = new System.Windows.Forms.Button();
             this.butt_start_assembly = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_component_status = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.butt_next_bom_line = new System.Windows.Forms.Button();
             this.butt_previous_bom_line = new System.Windows.Forms.Button();
@@ -49,7 +50,8 @@
             this.butt_probe = new System.Windows.Forms.Button();
             this.text_probe = new System.Windows.Forms.TextBox();
             this.label_probe = new System.Windows.Forms.Label();
-            this.label_component_status = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label_progress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +132,7 @@
             // 
             // butt_start_assembly
             // 
-            this.butt_start_assembly.Location = new System.Drawing.Point(1434, 273);
+            this.butt_start_assembly.Location = new System.Drawing.Point(1434, 364);
             this.butt_start_assembly.Name = "butt_start_assembly";
             this.butt_start_assembly.Size = new System.Drawing.Size(245, 23);
             this.butt_start_assembly.TabIndex = 8;
@@ -150,11 +152,21 @@
             this.groupBox1.Controls.Add(this.label_current_component);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label_cnt_in_bom_line);
-            this.groupBox1.Location = new System.Drawing.Point(1434, 12);
+            this.groupBox1.Location = new System.Drawing.Point(1434, 103);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(245, 238);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            // 
+            // label_component_status
+            // 
+            this.label_component_status.AutoSize = true;
+            this.label_component_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_component_status.Location = new System.Drawing.Point(6, 122);
+            this.label_component_status.Name = "label_component_status";
+            this.label_component_status.Size = new System.Drawing.Size(11, 13);
+            this.label_component_status.TabIndex = 10;
+            this.label_component_status.Text = "-";
             // 
             // label2
             // 
@@ -243,7 +255,7 @@
             // 
             // butt_probe
             // 
-            this.butt_probe.Location = new System.Drawing.Point(1590, 400);
+            this.butt_probe.Location = new System.Drawing.Point(1590, 491);
             this.butt_probe.Name = "butt_probe";
             this.butt_probe.Size = new System.Drawing.Size(50, 30);
             this.butt_probe.TabIndex = 10;
@@ -254,7 +266,7 @@
             // 
             // text_probe
             // 
-            this.text_probe.Location = new System.Drawing.Point(1535, 406);
+            this.text_probe.Location = new System.Drawing.Point(1535, 497);
             this.text_probe.Name = "text_probe";
             this.text_probe.Size = new System.Drawing.Size(39, 20);
             this.text_probe.TabIndex = 11;
@@ -262,27 +274,35 @@
             // label_probe
             // 
             this.label_probe.AutoSize = true;
-            this.label_probe.Location = new System.Drawing.Point(1440, 409);
+            this.label_probe.Location = new System.Drawing.Point(1440, 500);
             this.label_probe.Name = "label_probe";
             this.label_probe.Size = new System.Drawing.Size(89, 13);
             this.label_probe.TabIndex = 12;
             this.label_probe.Text = "probe designator:";
             // 
-            // label_component_status
+            // progressBar
             // 
-            this.label_component_status.AutoSize = true;
-            this.label_component_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_component_status.Location = new System.Drawing.Point(6, 122);
-            this.label_component_status.Name = "label_component_status";
-            this.label_component_status.Size = new System.Drawing.Size(11, 13);
-            this.label_component_status.TabIndex = 10;
-            this.label_component_status.Text = "-";
+            this.progressBar.Location = new System.Drawing.Point(1434, 44);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(245, 25);
+            this.progressBar.TabIndex = 13;
+            // 
+            // label_progress
+            // 
+            this.label_progress.Location = new System.Drawing.Point(1434, 23);
+            this.label_progress.Name = "label_progress";
+            this.label_progress.Size = new System.Drawing.Size(245, 13);
+            this.label_progress.TabIndex = 14;
+            this.label_progress.Text = "-/-";
+            this.label_progress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // main_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1691, 864);
+            this.Controls.Add(this.label_progress);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label_probe);
             this.Controls.Add(this.text_probe);
             this.Controls.Add(this.butt_probe);
@@ -330,6 +350,8 @@
         private System.Windows.Forms.TextBox text_probe;
         private System.Windows.Forms.Label label_probe;
         private System.Windows.Forms.Label label_component_status;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label_progress;
     }
 }
 

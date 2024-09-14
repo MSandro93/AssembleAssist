@@ -79,6 +79,20 @@ namespace AssembleAssist
             }
             return 1;
         }
+
+        public int howManyPlacedSkipped()
+        {
+            int cnt_place_skipped = 0;
+            foreach (pnp_entry l in pnp_list)
+            {
+                if ((l.place_state == component_state.placed) || (l.place_state == component_state.skipped))
+                {
+                    cnt_place_skipped++;
+                }
+            }
+
+            return cnt_place_skipped;
+        }
     }
 
     internal static class Program
