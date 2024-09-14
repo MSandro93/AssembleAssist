@@ -126,6 +126,10 @@ namespace AssembleAssist
 
         private void butt_set_up_asd_origin_dimension_Click(object sender, EventArgs e)
         {
+
+            butt_set_up_asd_origin_dimension.BackColor = Color.FromArgb(255, 128, 128); // chilled red
+            state &= ~4;
+
             if (pictureBox_asd_image.Image == null)
             {
                 MessageBox.Show("Load image first");
@@ -133,10 +137,11 @@ namespace AssembleAssist
                 return;
             }
 
-            MessageBox.Show("Click on board origin");
-            oringin_selecting_state = 1;
+            pictureBox_asd_image.Image = (Image)asd_image.Clone();
+            pictureBox_asd_image.Update();
 
-            state &= ~4;
+            MessageBox.Show("Click on board origin");
+            oringin_selecting_state = 1;    
         }
 
         private void pictureBox_asd_image_Click(object sender, MouseEventArgs e)
@@ -188,7 +193,7 @@ namespace AssembleAssist
                     {
                         resolution_y = board_height_px / Convert.ToDouble(report);
                         oringin_selecting_state = 7;
-                        butt_set_up_asd_origin_dimension.BackColor = Color.FromArgb(128, 255, 128); //red: 255; 128; 128
+                        butt_set_up_asd_origin_dimension.BackColor = Color.FromArgb(128, 255, 128); // chilled green
                         state |= 4;
                         break;
                     }
@@ -250,15 +255,22 @@ namespace AssembleAssist
                     current_comp_in_bom_line = 1;
                 }
 
-                if (current_comp_in_bom_line == 1)
+                if ((current_comp_in_bom_line == 1) && (current_bom_line>1) )
                 {
                     butt_previous_bom_line.Enabled = true;
                 }
-
                 else
                 {
-                    butt_next_bom_line.Enabled = false;
                     butt_previous_bom_line.Enabled = false;
+                }
+
+                if(current_comp_in_bom_line < shared_data.bom_list[current_bom_line].designators.Count())
+                {
+                    butt_next_bom_line.Enabled = false;
+                }
+                else
+                {
+                    butt_next_bom_line.Enabled = true;
                 }
 
                 update_assemble_overview();
@@ -271,27 +283,27 @@ namespace AssembleAssist
                 if (current_comp_in_bom_line > shared_data.bom_list[current_bom_line].designators.Count())
                 {
                     current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Count();
-                    
                 }
 
                 if (current_comp_in_bom_line == shared_data.bom_list[current_bom_line].designators.Count())
                 {
                     butt_next_bom_line.Enabled = true;
                 }
-
-                if (shared_data.bom_list[current_bom_line].designators.Count() == 1)
-                {
-                    butt_previous_bom_line.Enabled = true;
-                }
-
                 else
                 {
                     butt_next_bom_line.Enabled = false;
+                }
+
+                if ((current_comp_in_bom_line == 1) && (shared_data.bom_list[current_bom_line].designators.Count() == 1))
+                {
+                    butt_previous_bom_line.Enabled = true;
+                }
+                else
+                {
                     butt_previous_bom_line.Enabled = false;
                 }
 
                 update_assemble_overview();
-
                 return true;
             }
 
@@ -302,6 +314,14 @@ namespace AssembleAssist
         {
             current_bom_line++;
             current_comp_in_bom_line = 1;
+
+            if (shared_data.bom_list[current_bom_line].designators.Length > 1)
+            {
+                butt_next_bom_line.Enabled = false;
+            }
+
+            butt_previous_bom_line.Enabled=true;
+
             update_assemble_overview();
         }
 
@@ -309,6 +329,14 @@ namespace AssembleAssist
         {
             current_bom_line--;
             current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Length;
+
+            if (shared_data.bom_list[current_bom_line].designators.Length > 1)
+            {
+                butt_previous_bom_line.Enabled = false;
+            }
+
+            butt_next_bom_line.Enabled = true;
+
             update_assemble_overview();
         }
     }

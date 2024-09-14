@@ -14,19 +14,37 @@ namespace AssembleAssist
 {
     public partial class load_pnp_win : Form
     {
-        data shared_data_ext = null;
-        List<string> pnp_lines = new List<string>();
-        int pnp_starting_line = 1;
-        char pnp_seperator = ';';
-        DataTable dt = new DataTable();
-        int state = 0;
-        int designatort_column = 0;
-        int x_cootdiante_column = 0;
-        int y_cootdiante_column = 0;
-        int layer_colum = 0;
+        private data shared_data_ext = null;
+        private List<string> pnp_lines = new List<string>();
+        private int pnp_starting_line = 1;
+        private char pnp_seperator = ';';
+        private DataTable dt = new DataTable();
+        private int state = 0;
+        private int designatort_column = 0;
+        private int x_cootdiante_column = 0;
+        private int y_cootdiante_column = 0;
+        private int layer_colum = 0;
         public string top_layer_name = "";
         public string bot_layer_name = "";
         public char local_system_decimal_seperator = ',';
+
+        private string help_string = "1. Set number of the first valid data row in pick and place table\n" +
+                                    "2. Select seperator until preview of BoM is displayed correctly.\n" +
+                                    "3. Select a cell in the column that holds the designators and click \"select designator column\"\n" +
+                                    "4. Select x and y coorinate column by selecting a cell and clicking particular button\"\n" +
+                                    "5. Select a cell in the column that holds the board side and click \"select layer\". Specify the stings for top and bottom side in the appearing dialog.\n    Coordinates have to be absolute";
+
+
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        }
 
         public load_pnp_win(data shared_data_)
         {
@@ -37,13 +55,6 @@ namespace AssembleAssist
 
         private void load_pnp_win_Load(object sender, EventArgs e)
         {
-            Info_box info = new Info_box(   "1. Set number of the first valid data row in pick and place table\n" +
-                                            "2. Select seperator until preview of BoM is displayed correctly.\n" +
-                                            "3. Select a cell in the column that holds the designators and click \"select designator column\"\n" +
-                                            "4. Select x and y coorinate column by selecting a cell and clicking particular button\"\n" +
-                                            "5. Select a cell in the column that holds the board side and click \"select layer\". Specify the stings for top and bottom side in the appearing dialog.\n    Coordinates have to be absolute");
-            info.ShowDialog();
-
             if (shared_data_ext.pnp_path == "")
             {
                 MessageBox.Show("Filepath is empty");
@@ -353,6 +364,10 @@ namespace AssembleAssist
             }
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Info_box info = new Info_box(help_string);
+            info.ShowDialog();
+        }
     }
 }

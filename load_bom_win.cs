@@ -24,7 +24,24 @@ namespace AssembleAssist
         private int param2_column;          //holds the index of the second BoM column, displayed to the user during baord assembly
         private int state = 0;              //prevents user from applying changes until designator, param1 and param2 columns are specified
 
+        private string help_text =  "1. Set number of the first valid data row in BoM.\n" +
+                                    "2. Select seperator to preview the BoM correctly.\n" +
+                                    "3. Select a cell in the column that holds the designators and click \"select designator column.\"\n" +
+                                    "4. Select first and second BoM parameter to show during assembly process by selecting a cell and clicking particular button.\n" +
+                                    "5. Click \"Ok\" button to finish. Appearing message shows count of loaded BoM lines.";
+
         data shared_data_ext = null;
+
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        }
 
         public load_bom_win(data shared_data_)
         {
@@ -34,12 +51,6 @@ namespace AssembleAssist
 
         private void load_bom_win_Load(object sender, EventArgs e)
         {
-            Info_box info = new Info_box("1. Set number of the first valid data row in BoM\n" +
-                                            "2. Select seperator until preview of BoM is displayed correctly.\n" +
-                                            "3. Select a cell in the column that hold the designators and click \"select designator column\"\n" +
-                                            "4. Select first and second BoM parameter to show during Assembly proces by selecting a cell and clicking particular button");
-            info.ShowDialog();
-
             if (shared_data_ext.bom_path == "")
             {
                 MessageBox.Show("Filepath is empty");
@@ -310,6 +321,12 @@ namespace AssembleAssist
                 bom_seperator = text_custom.Text[0];
                 updateBoMPreview();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Info_box info = new Info_box(help_text);
+            info.ShowDialog();
         }
     }
 }

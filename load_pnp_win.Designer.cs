@@ -54,6 +54,7 @@
             this.radio_decimal_sep_dot = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PnP_Previewer)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -93,9 +94,9 @@
             // ok_butt
             // 
             this.ok_butt.Enabled = false;
-            this.ok_butt.Location = new System.Drawing.Point(976, 350);
+            this.ok_butt.Location = new System.Drawing.Point(978, 409);
             this.ok_butt.Name = "ok_butt";
-            this.ok_butt.Size = new System.Drawing.Size(47, 43);
+            this.ok_butt.Size = new System.Drawing.Size(45, 45);
             this.ok_butt.TabIndex = 22;
             this.ok_butt.Text = "Ok";
             this.ok_butt.UseVisualStyleBackColor = true;
@@ -196,7 +197,7 @@
             this.PnP_Previewer.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.PnP_Previewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PnP_Previewer.ColumnHeadersVisible = false;
-            this.PnP_Previewer.Location = new System.Drawing.Point(12, 12);
+            this.PnP_Previewer.Location = new System.Drawing.Point(12, 73);
             this.PnP_Previewer.Name = "PnP_Previewer";
             this.PnP_Previewer.ReadOnly = true;
             this.PnP_Previewer.RowHeadersVisible = false;
@@ -278,7 +279,7 @@
             this.groupBox1.Controls.Add(this.radio_custom);
             this.groupBox1.Controls.Add(this.text_custom);
             this.groupBox1.Controls.Add(this.text_startline);
-            this.groupBox1.Location = new System.Drawing.Point(12, 262);
+            this.groupBox1.Location = new System.Drawing.Point(12, 323);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(274, 131);
             this.groupBox1.TabIndex = 33;
@@ -296,7 +297,7 @@
             this.groupBox2.Controls.Add(this.butt_y_coor);
             this.groupBox2.Controls.Add(this.butt_select_designator);
             this.groupBox2.Controls.Add(this.label_selected_designator);
-            this.groupBox2.Location = new System.Drawing.Point(303, 262);
+            this.groupBox2.Location = new System.Drawing.Point(303, 323);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(374, 131);
             this.groupBox2.TabIndex = 34;
@@ -341,18 +342,29 @@
             this.groupBox3.Controls.Add(this.comboBox_selected_layer);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label_layer);
-            this.groupBox3.Location = new System.Drawing.Point(693, 262);
+            this.groupBox3.Location = new System.Drawing.Point(693, 323);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(255, 131);
             this.groupBox3.TabIndex = 35;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Assemble Board Side";
             // 
+            // button1
+            // 
+            this.button1.Image = global::AssembleAssist.Properties.Resources.help;
+            this.button1.Location = new System.Drawing.Point(978, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(45, 45);
+            this.button1.TabIndex = 36;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // load_pnp_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1035, 408);
+            this.ClientSize = new System.Drawing.Size(1035, 466);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -400,5 +412,6 @@
         private System.Windows.Forms.RadioButton radio_decimal_sep_comma;
         private System.Windows.Forms.RadioButton radio_decimal_sep_dot;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button1;
     }
 }

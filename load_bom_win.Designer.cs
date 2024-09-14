@@ -46,6 +46,7 @@ namespace AssembleAssist
             this.label_selected_designator = new System.Windows.Forms.Label();
             this.label_param1 = new System.Windows.Forms.Label();
             this.label_param2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BoM_Previewer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@ namespace AssembleAssist
             this.BoM_Previewer.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.BoM_Previewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BoM_Previewer.ColumnHeadersVisible = false;
-            this.BoM_Previewer.Location = new System.Drawing.Point(12, 12);
+            this.BoM_Previewer.Location = new System.Drawing.Point(12, 74);
             this.BoM_Previewer.Name = "BoM_Previewer";
             this.BoM_Previewer.ReadOnly = true;
             this.BoM_Previewer.RowHeadersVisible = false;
@@ -71,7 +72,7 @@ namespace AssembleAssist
             // radio_dot
             // 
             this.radio_dot.AutoSize = true;
-            this.radio_dot.Location = new System.Drawing.Point(80, 324);
+            this.radio_dot.Location = new System.Drawing.Point(80, 386);
             this.radio_dot.Name = "radio_dot";
             this.radio_dot.Size = new System.Drawing.Size(40, 17);
             this.radio_dot.TabIndex = 1;
@@ -83,7 +84,7 @@ namespace AssembleAssist
             // label_seperator
             // 
             this.label_seperator.AutoSize = true;
-            this.label_seperator.Location = new System.Drawing.Point(12, 326);
+            this.label_seperator.Location = new System.Drawing.Point(12, 388);
             this.label_seperator.Name = "label_seperator";
             this.label_seperator.Size = new System.Drawing.Size(54, 13);
             this.label_seperator.TabIndex = 2;
@@ -92,7 +93,7 @@ namespace AssembleAssist
             // radio_comma
             // 
             this.radio_comma.AutoSize = true;
-            this.radio_comma.Location = new System.Drawing.Point(138, 324);
+            this.radio_comma.Location = new System.Drawing.Point(138, 386);
             this.radio_comma.Name = "radio_comma";
             this.radio_comma.Size = new System.Drawing.Size(59, 17);
             this.radio_comma.TabIndex = 3;
@@ -105,7 +106,7 @@ namespace AssembleAssist
             // 
             this.radio_semicolon.AutoSize = true;
             this.radio_semicolon.Checked = true;
-            this.radio_semicolon.Location = new System.Drawing.Point(203, 324);
+            this.radio_semicolon.Location = new System.Drawing.Point(203, 386);
             this.radio_semicolon.Name = "radio_semicolon";
             this.radio_semicolon.Size = new System.Drawing.Size(72, 17);
             this.radio_semicolon.TabIndex = 4;
@@ -118,7 +119,7 @@ namespace AssembleAssist
             // radio_custom
             // 
             this.radio_custom.AutoSize = true;
-            this.radio_custom.Location = new System.Drawing.Point(281, 324);
+            this.radio_custom.Location = new System.Drawing.Point(281, 386);
             this.radio_custom.Name = "radio_custom";
             this.radio_custom.Size = new System.Drawing.Size(62, 17);
             this.radio_custom.TabIndex = 5;
@@ -129,7 +130,7 @@ namespace AssembleAssist
             // 
             // text_custom
             // 
-            this.text_custom.Location = new System.Drawing.Point(341, 324);
+            this.text_custom.Location = new System.Drawing.Point(341, 386);
             this.text_custom.Name = "text_custom";
             this.text_custom.Size = new System.Drawing.Size(34, 20);
             this.text_custom.TabIndex = 6;
@@ -137,7 +138,7 @@ namespace AssembleAssist
             // 
             // text_startline
             // 
-            this.text_startline.Location = new System.Drawing.Point(116, 280);
+            this.text_startline.Location = new System.Drawing.Point(116, 342);
             this.text_startline.Name = "text_startline";
             this.text_startline.Size = new System.Drawing.Size(50, 20);
             this.text_startline.TabIndex = 7;
@@ -147,7 +148,7 @@ namespace AssembleAssist
             // label_startline
             // 
             this.label_startline.AutoSize = true;
-            this.label_startline.Location = new System.Drawing.Point(12, 283);
+            this.label_startline.Location = new System.Drawing.Point(12, 345);
             this.label_startline.Name = "label_startline";
             this.label_startline.Size = new System.Drawing.Size(98, 13);
             this.label_startline.TabIndex = 8;
@@ -156,9 +157,9 @@ namespace AssembleAssist
             // ok_butt
             // 
             this.ok_butt.Enabled = false;
-            this.ok_butt.Location = new System.Drawing.Point(625, 306);
+            this.ok_butt.Location = new System.Drawing.Point(627, 366);
             this.ok_butt.Name = "ok_butt";
-            this.ok_butt.Size = new System.Drawing.Size(47, 43);
+            this.ok_butt.Size = new System.Drawing.Size(45, 45);
             this.ok_butt.TabIndex = 9;
             this.ok_butt.Text = "Ok";
             this.ok_butt.UseVisualStyleBackColor = true;
@@ -166,7 +167,7 @@ namespace AssembleAssist
             // 
             // butt_select_designator
             // 
-            this.butt_select_designator.Location = new System.Drawing.Point(216, 278);
+            this.butt_select_designator.Location = new System.Drawing.Point(216, 340);
             this.butt_select_designator.Name = "butt_select_designator";
             this.butt_select_designator.Size = new System.Drawing.Size(98, 23);
             this.butt_select_designator.TabIndex = 10;
@@ -176,7 +177,7 @@ namespace AssembleAssist
             // 
             // butt_param1
             // 
-            this.butt_param1.Location = new System.Drawing.Point(333, 277);
+            this.butt_param1.Location = new System.Drawing.Point(333, 339);
             this.butt_param1.Name = "butt_param1";
             this.butt_param1.Size = new System.Drawing.Size(111, 23);
             this.butt_param1.TabIndex = 11;
@@ -186,7 +187,7 @@ namespace AssembleAssist
             // 
             // butt_param2
             // 
-            this.butt_param2.Location = new System.Drawing.Point(459, 277);
+            this.butt_param2.Location = new System.Drawing.Point(459, 339);
             this.butt_param2.Name = "butt_param2";
             this.butt_param2.Size = new System.Drawing.Size(111, 23);
             this.butt_param2.TabIndex = 12;
@@ -197,7 +198,7 @@ namespace AssembleAssist
             // label_selected_designator
             // 
             this.label_selected_designator.AutoSize = true;
-            this.label_selected_designator.Location = new System.Drawing.Point(255, 262);
+            this.label_selected_designator.Location = new System.Drawing.Point(255, 324);
             this.label_selected_designator.Name = "label_selected_designator";
             this.label_selected_designator.Size = new System.Drawing.Size(10, 13);
             this.label_selected_designator.TabIndex = 13;
@@ -206,7 +207,7 @@ namespace AssembleAssist
             // label_param1
             // 
             this.label_param1.AutoSize = true;
-            this.label_param1.Location = new System.Drawing.Point(380, 261);
+            this.label_param1.Location = new System.Drawing.Point(380, 323);
             this.label_param1.Name = "label_param1";
             this.label_param1.Size = new System.Drawing.Size(10, 13);
             this.label_param1.TabIndex = 14;
@@ -215,17 +216,28 @@ namespace AssembleAssist
             // label_param2
             // 
             this.label_param2.AutoSize = true;
-            this.label_param2.Location = new System.Drawing.Point(510, 261);
+            this.label_param2.Location = new System.Drawing.Point(510, 323);
             this.label_param2.Name = "label_param2";
             this.label_param2.Size = new System.Drawing.Size(10, 13);
             this.label_param2.TabIndex = 15;
             this.label_param2.Text = "-";
             // 
+            // button2
+            // 
+            this.button2.Image = global::AssembleAssist.Properties.Resources.help;
+            this.button2.Location = new System.Drawing.Point(627, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(45, 45);
+            this.button2.TabIndex = 17;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // load_bom_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 361);
+            this.ClientSize = new System.Drawing.Size(684, 423);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label_param2);
             this.Controls.Add(this.label_param1);
             this.Controls.Add(this.label_selected_designator);
@@ -269,5 +281,6 @@ namespace AssembleAssist
         private System.Windows.Forms.Label label_selected_designator;
         private System.Windows.Forms.Label label_param1;
         private System.Windows.Forms.Label label_param2;
+        private System.Windows.Forms.Button button2;
     }
 }
