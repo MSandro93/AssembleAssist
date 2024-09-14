@@ -62,12 +62,22 @@ namespace AssembleAssist
                 return;
             }
 
-            var tmp = File.ReadLines(shared_data_ext.pnp_path);
-
-            foreach (string l in tmp)
+            try
             {
-                pnp_lines.Add(l);
+                var tmp = File.ReadLines(shared_data_ext.pnp_path);
+                foreach (string l in tmp)
+                {
+                    pnp_lines.Add(l);
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+                return;
+            }
+
+            
 
             if (pnp_lines.Count < 1)
             {

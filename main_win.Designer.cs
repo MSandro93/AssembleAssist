@@ -300,7 +300,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1691, 864);
+            this.ClientSize = new System.Drawing.Size(1684, 861);
             this.Controls.Add(this.label_progress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label_probe);
@@ -318,6 +318,7 @@
             this.KeyPreview = true;
             this.Name = "main_win";
             this.Text = "Assemble Assist";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_win_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

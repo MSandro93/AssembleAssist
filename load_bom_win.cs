@@ -58,11 +58,18 @@ namespace AssembleAssist
                 return;
             }
 
-            var tmp = File.ReadLines(shared_data_ext.bom_path);
-
-            foreach (string l in tmp)
+            try
             {
-                bom_content.Add(l);
+                var tmp = File.ReadLines(shared_data_ext.bom_path);
+                foreach (string l in tmp)
+                {
+                    bom_content.Add(l);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
             }
 
             if (bom_content.Count < 1)
@@ -187,7 +194,7 @@ namespace AssembleAssist
         {
             try
             {
-                bom_starting_line = Convert.ToInt32(text_startline.Text);
+                bom_starting_line = Convert.ToInt32(text_startline.Text) -1 ; // 0 to n
             }
             catch
             {
@@ -200,11 +207,9 @@ namespace AssembleAssist
 
         private void ok_butt_Click(object sender, EventArgs e)
         {
-            var test = BoM_Previewer.SelectedCells;
-
             shared_data_ext.bom_list.Clear();
 
-            for (int i = bom_starting_line; i < bom_content.Count; i++)  // for every line in BoM, starting with the defined starting line..
+            for (int i = bom_starting_line-1; i < bom_content.Count; i++)  // for every line in BoM, starting with the defined starting line..
             {
                 string[] bom_cells = bom_content[i].Split(bom_seperator);   // split line by defined seperator
 

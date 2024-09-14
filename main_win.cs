@@ -11,6 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing.Drawing2D;
 using static AssembleAssist.pnp_entry;
+using System.IO;
 
 namespace AssembleAssist
 {
@@ -94,7 +95,7 @@ namespace AssembleAssist
             asd_image = Image.FromFile(fd_asd.FileName);
 
             // draws resized asd-image to picturebox. Replaces original image with the resized one. Resized to fit the picturebox.
-            double aspect_ratio_pb    = pictureBox_asd_image.Width / (pictureBox_asd_image.Height * 1.0);
+            double aspect_ratio_pb = pictureBox_asd_image.Width / (pictureBox_asd_image.Height * 1.0);
             double aspect_ratio_image = asd_image.Width / (asd_image.Height * 1.0);
 
             int new_image_height = 0;
@@ -143,7 +144,7 @@ namespace AssembleAssist
             pictureBox_asd_image.Update();
 
             MessageBox.Show("Click on board origin");
-            oringin_selecting_state = 1;    
+            oringin_selecting_state = 1;
         }
 
         private void pictureBox_asd_image_Click(object sender, MouseEventArgs e)
@@ -172,7 +173,7 @@ namespace AssembleAssist
                     {
                         EnterDiag enterMaxY_diag = new EnterDiag(this, "Enter maximum board height (you clicked on) in the unit that is used by the pick and place list as float.");
                         oringin_selecting_state = 6;
-                        board_height_px = oringin_y  - e.Location.Y;
+                        board_height_px = oringin_y - e.Location.Y;
                         enterMaxY_diag.Show();
                         break;
                     }
@@ -212,11 +213,11 @@ namespace AssembleAssist
 
             progressBar.Maximum = shared_data.pnp_list.Count;
             progressBar.Minimum = 0;
-            progressBar.Value   = 0;
+            progressBar.Value = 0;
             label_progress.Text = "0/" + shared_data.pnp_list.Count().ToString() + "  (0%)";
 
-            current_bom_line = 1;
-            current_comp_in_bom_line = 1;
+            current_bom_line = 0;
+            current_comp_in_bom_line = 0;
             update_assemble_overview();
         }
 
@@ -226,8 +227,6 @@ namespace AssembleAssist
 
             foreach (pnp_entry cmp in shared_data.pnp_list) // search for coordinates of current component in pick an place lost
             {
-                Console.WriteLine(cmp.desigantor);
-
                 if (cmp.desigantor == decs_)
                 {
                     int x = Convert.ToInt32(Math.Round((cmp.x * resolution_x) + oringin_x));
@@ -249,35 +248,35 @@ namespace AssembleAssist
 
         private void update_assemble_overview()
         {
-            current_designator = shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1];
+            current_designator = shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line];
 
-            label_bom_line.Text = current_bom_line.ToString() + "/" + shared_data.bom_list.Count.ToString();
+            label_bom_line.Text = (current_bom_line+1).ToString() + "/" + shared_data.bom_list.Count.ToString();
             label_param1.Text = shared_data.bom_list[current_bom_line].parameter1;
             label_param2.Text = shared_data.bom_list[current_bom_line].parameter2;
-            label_cnt_in_bom_line.Text = current_comp_in_bom_line.ToString() + "/" + shared_data.bom_list[current_bom_line].designators.Count().ToString();
+            label_cnt_in_bom_line.Text = (current_comp_in_bom_line+1).ToString() + "/" + shared_data.bom_list[current_bom_line].designators.Count().ToString();
             label_current_component.Text = current_designator;
 
-            component_state placedState= shared_data.getStateByDesignator(current_designator);
+            component_state placedState = shared_data.getStateByDesignator(current_designator);
             switch (placedState)
             {
                 case component_state.not_placed:
-                {
-                    label_component_status.Text = "not placed";
-                    label_component_status.ForeColor = Color.Black;
-                    break;
-                }
+                    {
+                        label_component_status.Text = "not placed";
+                        label_component_status.ForeColor = Color.Black;
+                        break;
+                    }
                 case component_state.placed:
-                {
-                    label_component_status.Text = "placed";
-                    label_component_status.ForeColor = Color.Green;
-                    break;
-                }
+                    {
+                        label_component_status.Text = "placed";
+                        label_component_status.ForeColor = Color.Green;
+                        break;
+                    }
                 case component_state.skipped:
-                {
-                    label_component_status.Text = "skipped";
-                    label_component_status.ForeColor = Color.Orange;
-                    break;
-                }
+                    {
+                        label_component_status.Text = "skipped";
+                        label_component_status.ForeColor = Color.Orange;
+                        break;
+                    }
             }
 
             probeComponent(current_designator);
@@ -288,12 +287,12 @@ namespace AssembleAssist
             if (keyData == Keys.Left)
             {
                 current_comp_in_bom_line -= 1;
-                if (current_comp_in_bom_line < 1)
+                if (current_comp_in_bom_line < 0) //clip
                 {
-                    current_comp_in_bom_line = 1;
+                    current_comp_in_bom_line = 0;
                 }
 
-                if ((current_comp_in_bom_line == 1) && (current_bom_line > 1))
+                if ((current_comp_in_bom_line == 0) && (current_bom_line > 0))  // enable previous button if we are not at the first bom line
                 {
                     butt_previous_bom_line.Enabled = true;
                 }
@@ -302,7 +301,7 @@ namespace AssembleAssist
                     butt_previous_bom_line.Enabled = false;
                 }
 
-                if (current_comp_in_bom_line < shared_data.bom_list[current_bom_line].designators.Count())
+                if (current_comp_in_bom_line < shared_data.bom_list[current_bom_line].designators.Count()-1)
                 {
                     butt_next_bom_line.Enabled = false;
                 }
@@ -318,12 +317,12 @@ namespace AssembleAssist
             else if (keyData == Keys.Right)
             {
                 current_comp_in_bom_line += 1;
-                if (current_comp_in_bom_line > shared_data.bom_list[current_bom_line].designators.Count())
+                if (current_comp_in_bom_line == shared_data.bom_list[current_bom_line].designators.Count())  //clip
                 {
-                    current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Count();
+                    current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Count()-1;
                 }
 
-                if (current_comp_in_bom_line == shared_data.bom_list[current_bom_line].designators.Count())
+                if (current_comp_in_bom_line == shared_data.bom_list[current_bom_line].designators.Count()-1) //reached last comp in bom line
                 {
                     butt_next_bom_line.Enabled = true;
                 }
@@ -332,7 +331,7 @@ namespace AssembleAssist
                     butt_next_bom_line.Enabled = false;
                 }
 
-                if ((current_comp_in_bom_line == 1) && (shared_data.bom_list[current_bom_line].designators.Count() == 1))
+                if ((current_comp_in_bom_line == 0) && (shared_data.bom_list[current_bom_line].designators.Count() == 1))
                 {
                     butt_previous_bom_line.Enabled = true;
                 }
@@ -400,21 +399,21 @@ namespace AssembleAssist
                 label_progress.Text = cnt_placed.ToString() + "/" + shared_data.pnp_list.Count().ToString() + "  (" + percentage.ToString() + "%)";
                 progressBar.Value = cnt_placed;
             }
-            
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void butt_next_bom_line_Click(object sender, EventArgs e)
         {
             current_bom_line++;
-            current_comp_in_bom_line = 1;
+            current_comp_in_bom_line = 0;
 
             if (shared_data.bom_list[current_bom_line].designators.Length > 1)
             {
                 butt_next_bom_line.Enabled = false;
             }
 
-            butt_previous_bom_line.Enabled=true;
+            butt_previous_bom_line.Enabled = true;
 
             update_assemble_overview();
         }
@@ -422,7 +421,7 @@ namespace AssembleAssist
         private void butt_previous_bom_line_Click(object sender, EventArgs e)
         {
             current_bom_line--;
-            current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Length;
+            current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Length-1;
 
             if (shared_data.bom_list[current_bom_line].designators.Length > 1)
             {
@@ -445,6 +444,53 @@ namespace AssembleAssist
         private void butt_probe_MouseUp(object sender, MouseEventArgs e)
         {
             probeComponent(current_designator);
+        }
+
+        private void main_win_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Do You Want to write report to Logfile?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+            switch(dr)
+            {
+                case DialogResult.Yes:
+                {
+                    if(shared_data.pnp_list.Count<1)
+                    {
+                        MessageBox.Show("No data to log. No log file created,");
+                        e.Cancel = true;
+                        return;
+                    }
+
+                    SaveFileDialog logfile_diag = new SaveFileDialog();
+                    logfile_diag.Filter = "log file (*.log)|*.log";
+                    logfile_diag.ShowDialog();
+
+                    StreamWriter logfile = new StreamWriter(logfile_diag.FileName);
+                    logfile.WriteLine("Used BoM: " + shared_data.bom_path);
+                    logfile.WriteLine("Used Pick and Place Data: " + shared_data.pnp_path + "\n");
+
+                    foreach(pnp_entry l in shared_data.pnp_list)
+                    {
+                        if(l.place_state != component_state.not_placed)
+                        {
+                            logfile.WriteLine(l.desigantor + " " + l.place_state.ToString());
+                        }
+                    }
+
+                    logfile.Close();
+                    break;
+                }
+                case DialogResult.No:
+                {
+                    return;
+                }
+                case DialogResult.Cancel:
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
         }
     }
 }
