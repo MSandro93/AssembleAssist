@@ -214,6 +214,33 @@ namespace AssembleAssist
             update_assemble_overview();
         }
 
+        private bool probeComponent(string decs_)
+        {
+            bool found = false;
+
+            foreach (pnp_entry cmp in shared_data.pnp_list) // search for coordinates of current component in pick an place lost
+            {
+                Console.WriteLine(cmp.desigantor);
+
+                if (cmp.desigantor == decs_)
+                {
+                    int x = Convert.ToInt32(Math.Round((cmp.x * resolution_x) + oringin_x));
+                    int y = oringin_y - Convert.ToInt32(Math.Round(cmp.y * resolution_y));
+
+                    pictureBox_asd_image.Image = (Image)asd_image.Clone();
+                    Graphics g_ = Graphics.FromImage(pictureBox_asd_image.Image);
+
+                    g_.DrawLine(pen, 0, y, pictureBox_asd_image.Image.Width, y);  //draw horizontal component of the cross
+                    g_.DrawLine(pen, x, 0, x, pictureBox_asd_image.Image.Height);  //draw vertical component of the cross
+                    pictureBox_asd_image.Update();
+                    found = true;
+                    break;
+                }
+            }
+
+            return found;
+        }
+
         private void update_assemble_overview()
         {
             string current_desigantor = shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1];
@@ -223,26 +250,7 @@ namespace AssembleAssist
             label_param2.Text = shared_data.bom_list[current_bom_line].parameter2;
             label_cnt_in_bom_line.Text = current_comp_in_bom_line.ToString() + "/" + shared_data.bom_list[current_bom_line].designators.Count().ToString();
             label_current_component.Text = current_desigantor;
-
-
-            foreach (pnp_entry cmp in shared_data.pnp_list) // search for coordinates of current component in pick an place lost
-            {
-                Console.WriteLine(cmp.desigantor);
-
-                if (cmp.desigantor == current_desigantor)
-                {
-                    int x = Convert.ToInt32(Math.Round((cmp.x *  resolution_x) + oringin_x));
-                    int y = oringin_y - Convert.ToInt32(Math.Round(cmp.y * resolution_y));
-
-                    pictureBox_asd_image.Image = (Image)asd_image.Clone();
-                    Graphics g_ = Graphics.FromImage(pictureBox_asd_image.Image);
-
-                    g_.DrawLine(pen, 0, y, pictureBox_asd_image.Image.Width, y);  //draw horizontal component of the cross
-                    g_.DrawLine(pen, x, 0, x,                                pictureBox_asd_image.Image.Height);  //draw vertical component of the cross
-                    pictureBox_asd_image.Update();
-                    break;
-                }
-            } 
+            probeComponent(current_desigantor);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -339,5 +347,19 @@ namespace AssembleAssist
 
             update_assemble_overview();
         }
+
+        private void butt_probe_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!probeComponent(text_probe.Text))
+            {
+                MessageBox.Show("Could not find " + text_probe.Text);
+            }
+        }
+
+        private void butt_probe_MouseUp(object sender, MouseEventArgs e)
+        {
+            probeComponent(shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1]);
+        }
+
     }
 }

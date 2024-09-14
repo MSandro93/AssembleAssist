@@ -46,6 +46,9 @@
             this.label_current_component = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_cnt_in_bom_line = new System.Windows.Forms.Label();
+            this.butt_probe = new System.Windows.Forms.Button();
+            this.text_probe = new System.Windows.Forms.TextBox();
+            this.label_probe = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -236,11 +239,41 @@
             this.label_cnt_in_bom_line.TabIndex = 0;
             this.label_cnt_in_bom_line.Text = "/";
             // 
+            // butt_probe
+            // 
+            this.butt_probe.Location = new System.Drawing.Point(1590, 400);
+            this.butt_probe.Name = "butt_probe";
+            this.butt_probe.Size = new System.Drawing.Size(50, 30);
+            this.butt_probe.TabIndex = 10;
+            this.butt_probe.Text = "probe";
+            this.butt_probe.UseVisualStyleBackColor = true;
+            this.butt_probe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.butt_probe_MouseDown);
+            this.butt_probe.MouseUp += new System.Windows.Forms.MouseEventHandler(this.butt_probe_MouseUp);
+            // 
+            // text_probe
+            // 
+            this.text_probe.Location = new System.Drawing.Point(1535, 406);
+            this.text_probe.Name = "text_probe";
+            this.text_probe.Size = new System.Drawing.Size(39, 20);
+            this.text_probe.TabIndex = 11;
+            // 
+            // label_probe
+            // 
+            this.label_probe.AutoSize = true;
+            this.label_probe.Location = new System.Drawing.Point(1440, 409);
+            this.label_probe.Name = "label_probe";
+            this.label_probe.Size = new System.Drawing.Size(89, 13);
+            this.label_probe.TabIndex = 12;
+            this.label_probe.Text = "probe designator:";
+            // 
             // main_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1691, 864);
+            this.Controls.Add(this.label_probe);
+            this.Controls.Add(this.text_probe);
+            this.Controls.Add(this.butt_probe);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.butt_start_assembly);
             this.Controls.Add(this.butt_set_up_asd_origin_dimension);
@@ -257,6 +290,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -280,6 +314,9 @@
         private System.Windows.Forms.Label label_bom_line;
         private System.Windows.Forms.Label label_param2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button butt_probe;
+        private System.Windows.Forms.TextBox text_probe;
+        private System.Windows.Forms.Label label_probe;
     }
 }
 
