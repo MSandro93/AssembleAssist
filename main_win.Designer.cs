@@ -49,6 +49,7 @@
             this.butt_probe = new System.Windows.Forms.Button();
             this.text_probe = new System.Windows.Forms.TextBox();
             this.label_probe = new System.Windows.Forms.Label();
+            this.label_component_status = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +140,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label_component_status);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.butt_next_bom_line);
             this.groupBox1.Controls.Add(this.butt_previous_bom_line);
@@ -157,7 +159,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 147);
+            this.label2.Location = new System.Drawing.Point(6, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 8;
@@ -166,7 +168,7 @@
             // butt_next_bom_line
             // 
             this.butt_next_bom_line.Enabled = false;
-            this.butt_next_bom_line.Location = new System.Drawing.Point(78, 173);
+            this.butt_next_bom_line.Location = new System.Drawing.Point(78, 190);
             this.butt_next_bom_line.Name = "butt_next_bom_line";
             this.butt_next_bom_line.Size = new System.Drawing.Size(41, 23);
             this.butt_next_bom_line.TabIndex = 7;
@@ -177,7 +179,7 @@
             // butt_previous_bom_line
             // 
             this.butt_previous_bom_line.Enabled = false;
-            this.butt_previous_bom_line.Location = new System.Drawing.Point(9, 173);
+            this.butt_previous_bom_line.Location = new System.Drawing.Point(9, 190);
             this.butt_previous_bom_line.Name = "butt_previous_bom_line";
             this.butt_previous_bom_line.Size = new System.Drawing.Size(41, 23);
             this.butt_previous_bom_line.TabIndex = 6;
@@ -188,7 +190,7 @@
             // label_bom_line
             // 
             this.label_bom_line.AutoSize = true;
-            this.label_bom_line.Location = new System.Drawing.Point(76, 147);
+            this.label_bom_line.Location = new System.Drawing.Point(76, 164);
             this.label_bom_line.Name = "label_bom_line";
             this.label_bom_line.Size = new System.Drawing.Size(12, 13);
             this.label_bom_line.TabIndex = 5;
@@ -266,6 +268,16 @@
             this.label_probe.TabIndex = 12;
             this.label_probe.Text = "probe designator:";
             // 
+            // label_component_status
+            // 
+            this.label_component_status.AutoSize = true;
+            this.label_component_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_component_status.Location = new System.Drawing.Point(6, 122);
+            this.label_component_status.Name = "label_component_status";
+            this.label_component_status.Size = new System.Drawing.Size(11, 13);
+            this.label_component_status.TabIndex = 10;
+            this.label_component_status.Text = "-";
+            // 
             // main_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +329,7 @@
         private System.Windows.Forms.Button butt_probe;
         private System.Windows.Forms.TextBox text_probe;
         private System.Windows.Forms.Label label_probe;
+        private System.Windows.Forms.Label label_component_status;
     }
 }
 

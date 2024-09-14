@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing.Drawing2D;
+using static AssembleAssist.pnp_entry;
 
 namespace AssembleAssist
 {
@@ -21,6 +22,7 @@ namespace AssembleAssist
         public double resolution_y = 1.0; //pixel per unit
         public int oringin_x = 0;   //x component of board origin in pixels
         public int oringin_y = 0;   //y component of board origin in pixels
+        string current_designator = "";
         int oringin_selecting_state = 0;
         int board_width_px = 0;
         int board_height_px = 0;
@@ -243,14 +245,38 @@ namespace AssembleAssist
 
         private void update_assemble_overview()
         {
-            string current_desigantor = shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1];
+            current_designator = shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1];
 
             label_bom_line.Text = current_bom_line.ToString() + "/" + shared_data.bom_list.Count.ToString();
             label_param1.Text = shared_data.bom_list[current_bom_line].parameter1;
             label_param2.Text = shared_data.bom_list[current_bom_line].parameter2;
             label_cnt_in_bom_line.Text = current_comp_in_bom_line.ToString() + "/" + shared_data.bom_list[current_bom_line].designators.Count().ToString();
-            label_current_component.Text = current_desigantor;
-            probeComponent(current_desigantor);
+            label_current_component.Text = current_designator;
+
+            component_state placedState= shared_data.getStateByDesignator(current_designator);
+            switch (placedState)
+            {
+                case component_state.not_placed:
+                {
+                    label_component_status.Text = "not placed";
+                    label_component_status.ForeColor = Color.Black;
+                    break;
+                }
+                case component_state.placed:
+                {
+                    label_component_status.Text = "placed";
+                    label_component_status.ForeColor = Color.Green;
+                    break;
+                }
+                case component_state.skipped:
+                {
+                    label_component_status.Text = "skipped";
+                    label_component_status.ForeColor = Color.Orange;
+                    break;
+                }
+            }
+
+            probeComponent(current_designator);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -263,7 +289,7 @@ namespace AssembleAssist
                     current_comp_in_bom_line = 1;
                 }
 
-                if ((current_comp_in_bom_line == 1) && (current_bom_line>1) )
+                if ((current_comp_in_bom_line == 1) && (current_bom_line > 1))
                 {
                     butt_previous_bom_line.Enabled = true;
                 }
@@ -272,7 +298,7 @@ namespace AssembleAssist
                     butt_previous_bom_line.Enabled = false;
                 }
 
-                if(current_comp_in_bom_line < shared_data.bom_list[current_bom_line].designators.Count())
+                if (current_comp_in_bom_line < shared_data.bom_list[current_bom_line].designators.Count())
                 {
                     butt_next_bom_line.Enabled = false;
                 }
@@ -315,6 +341,52 @@ namespace AssembleAssist
                 return true;
             }
 
+            else if (keyData == Keys.Space)
+            {
+                switch (shared_data.getStateByDesignator(current_designator))
+                {
+                    case pnp_entry.component_state.not_placed:
+                    case pnp_entry.component_state.skipped:
+                        {
+                            shared_data.setStateByDesignator(current_designator, component_state.placed);
+                            label_component_status.Text = "placed";
+                            label_component_status.ForeColor = Color.Green;
+                            break;
+                        }
+                    case pnp_entry.component_state.placed:
+                        {
+                            shared_data.setStateByDesignator(current_designator, component_state.not_placed);
+                            label_component_status.Text = "not placed";
+                            label_component_status.ForeColor = Color.Black;
+                            break;
+                        }
+                }
+
+                return true;
+            }
+
+            else if (keyData == Keys.Escape)
+            {
+                switch (shared_data.getStateByDesignator(current_designator))
+                {
+                    case pnp_entry.component_state.not_placed:
+                    case pnp_entry.component_state.placed:
+                        {
+                            shared_data.setStateByDesignator(current_designator, component_state.skipped);
+                            label_component_status.Text = "skipped";
+                            label_component_status.ForeColor = Color.Orange;
+                            break;
+                        }
+                    case pnp_entry.component_state.skipped:
+                        {
+                            shared_data.setStateByDesignator(current_designator, component_state.not_placed);
+                            label_component_status.Text = "not placed";
+                            label_component_status.ForeColor = Color.Black;
+                            break;
+                        }
+                }
+            }
+            
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -358,7 +430,7 @@ namespace AssembleAssist
 
         private void butt_probe_MouseUp(object sender, MouseEventArgs e)
         {
-            probeComponent(shared_data.bom_list[current_bom_line].designators[current_comp_in_bom_line - 1]);
+            probeComponent(current_designator);
         }
 
     }
