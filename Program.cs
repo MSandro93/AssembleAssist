@@ -10,13 +10,15 @@ namespace AssembleAssist
     public class bom_entry
     {
         //public List <string> designators = new List <string> ();
-        public string[] designators;
+        public List<string> designators;
         public string parameter1;
         public string parameter2;
         public int count;
 
         public bom_entry()
-        { }
+        {
+            designators = new List<string>();
+        }
     }
 
     public class pnp_entry
@@ -29,7 +31,7 @@ namespace AssembleAssist
             _error_ = 99
         }
 
-        public string desigantor;
+        public string designator;
         public double x;
         public double y;
         public component_state place_state;
@@ -41,7 +43,7 @@ namespace AssembleAssist
 
         public pnp_entry(string desc_, double x_ , double y_)
         {
-            desigantor = desc_.Replace("\"", "");
+            designator = desc_.Replace("\"", "");
             x = x_;
             y = y_;
             place_state = component_state.not_placed;
@@ -59,7 +61,7 @@ namespace AssembleAssist
         {
             foreach (pnp_entry l in pnp_list)
             {
-                if (l.desigantor == desc_)
+                if (l.designator == desc_)
                 {
                     return l.place_state;
                 }
@@ -71,7 +73,7 @@ namespace AssembleAssist
         {
             for(int i = 0; i < pnp_list.Count; i++)
             {
-                if (pnp_list[i].desigantor == desc_)
+                if (pnp_list[i].designator == desc_)
                 {
                     pnp_list[i].place_state = state_;
                     return 0;

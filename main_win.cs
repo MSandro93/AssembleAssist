@@ -24,7 +24,7 @@ namespace AssembleAssist
         public int oringin_x = 0;   //x component of board origin in pixels
         public int oringin_y = 0;   //y component of board origin in pixels
         string current_designator = "";
-        int oringin_selecting_state = 0;
+        int origin_selecting_state = 0;
         int board_width_px = 0;
         int board_height_px = 0;
         int state = 0;
@@ -136,7 +136,7 @@ namespace AssembleAssist
             if (pictureBox_asd_image.Image == null)
             {
                 MessageBox.Show("Load image first");
-                oringin_selecting_state = 0;
+                origin_selecting_state = 0;
                 return;
             }
 
@@ -144,18 +144,18 @@ namespace AssembleAssist
             pictureBox_asd_image.Update();
 
             MessageBox.Show("Click on board origin");
-            oringin_selecting_state = 1;
+            origin_selecting_state = 1;
         }
 
         private void pictureBox_asd_image_Click(object sender, MouseEventArgs e)
         {
-            switch (oringin_selecting_state)
+            switch (origin_selecting_state)
             {
                 case 1:
                     {
                         oringin_x = e.Location.X;
                         oringin_y = e.Location.Y;
-                        oringin_selecting_state = 2;
+                        origin_selecting_state = 2;
                         MessageBox.Show("Click board edge and specify maximum board width in appearing dialog.");
                         break;
                     }
@@ -163,7 +163,7 @@ namespace AssembleAssist
                 case 2:
                     {
                         EnterDiag enterMaxX_diag = new EnterDiag(this, "Enter maximum board width (you clicked on) in the unit that is used by the pick and place list as float.");
-                        oringin_selecting_state = 3;
+                        origin_selecting_state = 3;
                         board_width_px = e.Location.X - oringin_x;
                         enterMaxX_diag.Show();
                         break;
@@ -172,7 +172,7 @@ namespace AssembleAssist
                 case 4:
                     {
                         EnterDiag enterMaxY_diag = new EnterDiag(this, "Enter maximum board height (you clicked on) in the unit that is used by the pick and place list as float.");
-                        oringin_selecting_state = 6;
+                        origin_selecting_state = 6;
                         board_height_px = oringin_y - e.Location.Y;
                         enterMaxY_diag.Show();
                         break;
@@ -182,20 +182,20 @@ namespace AssembleAssist
 
         public void reportToParent(string report)
         {
-            switch (oringin_selecting_state)
+            switch (origin_selecting_state)
             {
                 case 3:
                     {
                         resolution_x = board_width_px / Convert.ToDouble(report);
                         MessageBox.Show("Click board edge and specify maximum board height in appearing dialog.");
-                        oringin_selecting_state = 4;
+                        origin_selecting_state = 4;
                         break;
                     }
 
                 case 6:
                     {
                         resolution_y = board_height_px / Convert.ToDouble(report);
-                        oringin_selecting_state = 7;
+                        origin_selecting_state = 7;
                         butt_set_up_asd_origin_dimension.BackColor = Color.FromArgb(128, 255, 128); // chilled green
                         state |= 4;
                         break;
@@ -210,6 +210,34 @@ namespace AssembleAssist
                 MessageBox.Show("Load BoM, pick and place data and assembly drawing. Specify dimentions of board by clicking \"setup\"-button.");
                 return;
             }
+
+            //Bill of Materials (BoM) normaly contains all components on both board sides. Thus pick and place data is only loaded for one board side,
+            //components on the oposite board side have to be removed from BoM-list before start of Assembly. They can not be found in pick and palce list.
+            bool found = false;
+
+            for (int b = 0; b < shared_data.bom_list.Count; b++)
+            {
+                for (int c = 0; c < shared_data.bom_list[b].designators.Count; c++)
+                {
+                    found = false;
+                    for (int p = 0; p < shared_data.pnp_list.Count; p++)
+                    {
+                        if (shared_data.pnp_list[p].designator == shared_data.bom_list[b].designators[c])
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        shared_data.bom_list[b].designators.Remove(shared_data.bom_list[b].designators[c]);
+                        c--;
+                    }
+                }
+            }
+
+
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // prevent from resizing after start of assembly
 
             progressBar.Maximum = shared_data.pnp_list.Count;
             progressBar.Minimum = 0;
@@ -227,7 +255,7 @@ namespace AssembleAssist
 
             foreach (pnp_entry cmp in shared_data.pnp_list) // search for coordinates of current component in pick an place lost
             {
-                if (cmp.desigantor == decs_)
+                if (cmp.designator == decs_)
                 {
                     int x = Convert.ToInt32(Math.Round((cmp.x * resolution_x) + oringin_x));
                     int y = oringin_y - Convert.ToInt32(Math.Round(cmp.y * resolution_y));
@@ -408,7 +436,7 @@ namespace AssembleAssist
             current_bom_line++;
             current_comp_in_bom_line = 0;
 
-            if (shared_data.bom_list[current_bom_line].designators.Length > 1)
+            if (shared_data.bom_list[current_bom_line].designators.Count > 1)
             {
                 butt_next_bom_line.Enabled = false;
             }
@@ -421,9 +449,9 @@ namespace AssembleAssist
         private void butt_previous_bom_line_Click(object sender, EventArgs e)
         {
             current_bom_line--;
-            current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Length-1;
+            current_comp_in_bom_line = shared_data.bom_list[current_bom_line].designators.Count-1;
 
-            if (shared_data.bom_list[current_bom_line].designators.Length > 1)
+            if (shared_data.bom_list[current_bom_line].designators.Count > 1)
             {
                 butt_previous_bom_line.Enabled = false;
             }
@@ -473,7 +501,7 @@ namespace AssembleAssist
                     {
                         if(l.place_state != component_state.not_placed)
                         {
-                            logfile.WriteLine(l.desigantor + " " + l.place_state.ToString());
+                            logfile.WriteLine(l.designator + " " + l.place_state.ToString());
                         }
                     }
 
@@ -491,6 +519,27 @@ namespace AssembleAssist
                 }
             }
 
+        }
+
+        private void main_win_Resize(object sender, EventArgs e)
+        {
+            if (pictureBox_asd_image.Image != null)
+            {
+                pictureBox_asd_image.Image.Dispose();
+                pictureBox_asd_image.Image = null;
+            }
+
+            butt_set_up_asd_origin_dimension.BackColor = Color.FromArgb(255, 128, 128); // chilled red
+            state &= ~4;
+
+            label_progress.Location      = new Point(this.Width - 266, label_progress.Location.Y);
+            progressBar.Location         = new Point(this.Width - 266, progressBar.Location.Y);
+            Box_ComponentInfo.Location   = new Point(this.Width - 266, Box_ComponentInfo.Location.Y);
+            butt_start_assembly.Location = new Point(this.Width - 266, butt_start_assembly.Location.Y);
+            box_probeComponent.Location  = new Point(this.Width - 266, box_probeComponent.Location.Y);
+
+            pictureBox_asd_image.Width = label_progress.Location.X - 34;
+            pictureBox_asd_image.Height = this.Height - pictureBox_asd_image.Location.Y - 12 - 37;
         }
     }
 }

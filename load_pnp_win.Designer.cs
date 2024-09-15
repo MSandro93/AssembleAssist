@@ -370,6 +370,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ok_butt);
             this.Controls.Add(this.PnP_Previewer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "load_pnp_win";
             this.Text = "Load Pick and Place";
             this.Load += new System.EventHandler(this.load_pnp_win_Load);

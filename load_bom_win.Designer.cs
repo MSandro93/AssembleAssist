@@ -254,6 +254,8 @@ namespace AssembleAssist
             this.Controls.Add(this.label_seperator);
             this.Controls.Add(this.radio_dot);
             this.Controls.Add(this.BoM_Previewer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "load_bom_win";
             this.Text = "Load BoM";
             this.Load += new System.EventHandler(this.load_bom_win_Load);

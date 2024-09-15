@@ -36,7 +36,7 @@
             this.pictureBox_asd_image = new System.Windows.Forms.PictureBox();
             this.butt_set_up_asd_origin_dimension = new System.Windows.Forms.Button();
             this.butt_start_assembly = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Box_ComponentInfo = new System.Windows.Forms.GroupBox();
             this.label_component_status = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.butt_next_bom_line = new System.Windows.Forms.Button();
@@ -52,8 +52,10 @@
             this.label_probe = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_progress = new System.Windows.Forms.Label();
+            this.box_probeComponent = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.Box_ComponentInfo.SuspendLayout();
+            this.box_probeComponent.SuspendLayout();
             this.SuspendLayout();
             // 
             // load_bom_butt
@@ -68,7 +70,7 @@
             // 
             // load_pnp_butt
             // 
-            this.load_pnp_butt.Location = new System.Drawing.Point(151, 12);
+            this.load_pnp_butt.Location = new System.Drawing.Point(146, 12);
             this.load_pnp_butt.Name = "load_pnp_butt";
             this.load_pnp_butt.Size = new System.Drawing.Size(129, 48);
             this.load_pnp_butt.TabIndex = 1;
@@ -91,7 +93,7 @@
             // 
             this.label_pnp_lines_loaded.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_pnp_lines_loaded.ForeColor = System.Drawing.Color.Red;
-            this.label_pnp_lines_loaded.Location = new System.Drawing.Point(151, 68);
+            this.label_pnp_lines_loaded.Location = new System.Drawing.Point(146, 68);
             this.label_pnp_lines_loaded.Name = "label_pnp_lines_loaded";
             this.label_pnp_lines_loaded.Size = new System.Drawing.Size(129, 16);
             this.label_pnp_lines_loaded.TabIndex = 4;
@@ -100,7 +102,7 @@
             // 
             // load_asd_butt
             // 
-            this.load_asd_butt.Location = new System.Drawing.Point(304, 12);
+            this.load_asd_butt.Location = new System.Drawing.Point(293, 12);
             this.load_asd_butt.Name = "load_asd_butt";
             this.load_asd_butt.Size = new System.Drawing.Size(129, 48);
             this.load_asd_butt.TabIndex = 5;
@@ -114,7 +116,7 @@
             this.pictureBox_asd_image.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox_asd_image.Location = new System.Drawing.Point(12, 103);
             this.pictureBox_asd_image.Name = "pictureBox_asd_image";
-            this.pictureBox_asd_image.Size = new System.Drawing.Size(1401, 749);
+            this.pictureBox_asd_image.Size = new System.Drawing.Size(1400, 748);
             this.pictureBox_asd_image.TabIndex = 6;
             this.pictureBox_asd_image.TabStop = false;
             this.pictureBox_asd_image.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_asd_image_Click);
@@ -122,7 +124,7 @@
             // butt_set_up_asd_origin_dimension
             // 
             this.butt_set_up_asd_origin_dimension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.butt_set_up_asd_origin_dimension.Location = new System.Drawing.Point(304, 66);
+            this.butt_set_up_asd_origin_dimension.Location = new System.Drawing.Point(293, 65);
             this.butt_set_up_asd_origin_dimension.Name = "butt_set_up_asd_origin_dimension";
             this.butt_set_up_asd_origin_dimension.Size = new System.Drawing.Size(129, 23);
             this.butt_set_up_asd_origin_dimension.TabIndex = 7;
@@ -140,23 +142,24 @@
             this.butt_start_assembly.UseVisualStyleBackColor = true;
             this.butt_start_assembly.Click += new System.EventHandler(this.butt_start_assembly_Click);
             // 
-            // groupBox1
+            // Box_ComponentInfo
             // 
-            this.groupBox1.Controls.Add(this.label_component_status);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.butt_next_bom_line);
-            this.groupBox1.Controls.Add(this.butt_previous_bom_line);
-            this.groupBox1.Controls.Add(this.label_bom_line);
-            this.groupBox1.Controls.Add(this.label_param2);
-            this.groupBox1.Controls.Add(this.label_param1);
-            this.groupBox1.Controls.Add(this.label_current_component);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label_cnt_in_bom_line);
-            this.groupBox1.Location = new System.Drawing.Point(1434, 103);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 238);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
+            this.Box_ComponentInfo.Controls.Add(this.label_component_status);
+            this.Box_ComponentInfo.Controls.Add(this.label2);
+            this.Box_ComponentInfo.Controls.Add(this.butt_next_bom_line);
+            this.Box_ComponentInfo.Controls.Add(this.butt_previous_bom_line);
+            this.Box_ComponentInfo.Controls.Add(this.label_bom_line);
+            this.Box_ComponentInfo.Controls.Add(this.label_param2);
+            this.Box_ComponentInfo.Controls.Add(this.label_param1);
+            this.Box_ComponentInfo.Controls.Add(this.label_current_component);
+            this.Box_ComponentInfo.Controls.Add(this.label1);
+            this.Box_ComponentInfo.Controls.Add(this.label_cnt_in_bom_line);
+            this.Box_ComponentInfo.Location = new System.Drawing.Point(1434, 103);
+            this.Box_ComponentInfo.Name = "Box_ComponentInfo";
+            this.Box_ComponentInfo.Size = new System.Drawing.Size(245, 238);
+            this.Box_ComponentInfo.TabIndex = 9;
+            this.Box_ComponentInfo.TabStop = false;
+            this.Box_ComponentInfo.Text = "Component Info";
             // 
             // label_component_status
             // 
@@ -255,7 +258,7 @@
             // 
             // butt_probe
             // 
-            this.butt_probe.Location = new System.Drawing.Point(1590, 491);
+            this.butt_probe.Location = new System.Drawing.Point(167, 16);
             this.butt_probe.Name = "butt_probe";
             this.butt_probe.Size = new System.Drawing.Size(50, 30);
             this.butt_probe.TabIndex = 10;
@@ -266,7 +269,7 @@
             // 
             // text_probe
             // 
-            this.text_probe.Location = new System.Drawing.Point(1535, 497);
+            this.text_probe.Location = new System.Drawing.Point(108, 22);
             this.text_probe.Name = "text_probe";
             this.text_probe.Size = new System.Drawing.Size(39, 20);
             this.text_probe.TabIndex = 11;
@@ -274,7 +277,7 @@
             // label_probe
             // 
             this.label_probe.AutoSize = true;
-            this.label_probe.Location = new System.Drawing.Point(1440, 500);
+            this.label_probe.Location = new System.Drawing.Point(13, 25);
             this.label_probe.Name = "label_probe";
             this.label_probe.Size = new System.Drawing.Size(89, 13);
             this.label_probe.TabIndex = 12;
@@ -296,17 +299,27 @@
             this.label_progress.Text = "-/-";
             this.label_progress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // box_probeComponent
+            // 
+            this.box_probeComponent.Controls.Add(this.label_probe);
+            this.box_probeComponent.Controls.Add(this.text_probe);
+            this.box_probeComponent.Controls.Add(this.butt_probe);
+            this.box_probeComponent.Location = new System.Drawing.Point(1434, 435);
+            this.box_probeComponent.Name = "box_probeComponent";
+            this.box_probeComponent.Size = new System.Drawing.Size(245, 62);
+            this.box_probeComponent.TabIndex = 15;
+            this.box_probeComponent.TabStop = false;
+            this.box_probeComponent.Text = "Probe Component";
+            // 
             // main_win
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1684, 861);
+            this.Controls.Add(this.box_probeComponent);
             this.Controls.Add(this.label_progress);
             this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.label_probe);
-            this.Controls.Add(this.text_probe);
-            this.Controls.Add(this.butt_probe);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.Box_ComponentInfo);
             this.Controls.Add(this.butt_start_assembly);
             this.Controls.Add(this.butt_set_up_asd_origin_dimension);
             this.Controls.Add(this.pictureBox_asd_image);
@@ -316,14 +329,18 @@
             this.Controls.Add(this.load_pnp_butt);
             this.Controls.Add(this.load_bom_butt);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(710, 545);
             this.Name = "main_win";
             this.Text = "Assemble Assist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_win_FormClosing);
+            this.Resize += new System.EventHandler(this.main_win_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_asd_image)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Box_ComponentInfo.ResumeLayout(false);
+            this.Box_ComponentInfo.PerformLayout();
+            this.box_probeComponent.ResumeLayout(false);
+            this.box_probeComponent.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -337,7 +354,7 @@
         private System.Windows.Forms.PictureBox pictureBox_asd_image;
         private System.Windows.Forms.Button butt_set_up_asd_origin_dimension;
         private System.Windows.Forms.Button butt_start_assembly;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox Box_ComponentInfo;
         private System.Windows.Forms.Label label_param1;
         private System.Windows.Forms.Label label_current_component;
         private System.Windows.Forms.Label label1;
@@ -353,6 +370,7 @@
         private System.Windows.Forms.Label label_component_status;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label_progress;
+        private System.Windows.Forms.GroupBox box_probeComponent;
     }
 }
 

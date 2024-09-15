@@ -228,7 +228,7 @@ namespace AssembleAssist
                 }
 
                 shared_data_ext.bom_list.Add(new bom_entry());                                          // spawn and add new instance of bom_entry-class to list
-                shared_data_ext.bom_list.Last().designators = designators;  // fill up new instance
+                shared_data_ext.bom_list.Last().designators.AddRange(designators);  // fill up new instance
                 shared_data_ext.bom_list.Last().parameter1  = bom_cells[param1_column];
                 shared_data_ext.bom_list.Last().parameter2  = bom_cells[param2_column];
             }
