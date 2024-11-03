@@ -230,9 +230,15 @@ namespace AssembleAssist
                     }
                     if (found == false)
                     {
+                        //shared_data.bom_list.RemoveAt(b);
                         shared_data.bom_list[b].designators.Remove(shared_data.bom_list[b].designators[c]);
                         c--;
                     }
+                }
+                if(shared_data.bom_list[b].designators.Count < 1)   // in case all designators of the BoM-List were removed, because all of them are on the side which was not to be populated in this run, remove the BoM line entirely.
+                {
+                    shared_data.bom_list.RemoveAt(b);
+                    b--;
                 }
             }
 
@@ -434,6 +440,13 @@ namespace AssembleAssist
         private void butt_next_bom_line_Click(object sender, EventArgs e)
         {
             current_bom_line++;
+
+            if (current_bom_line >= shared_data.bom_list.Count)
+            {
+                MessageBox.Show("Finished!");
+                return;
+            }
+
             current_comp_in_bom_line = 0;
 
             if (shared_data.bom_list[current_bom_line].designators.Count > 1)
@@ -476,7 +489,7 @@ namespace AssembleAssist
 
         private void main_win_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Do You Want to write report to Logfile?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            DialogResult dr = MessageBox.Show("Do You want to write report to Logfile?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
             switch(dr)
             {
