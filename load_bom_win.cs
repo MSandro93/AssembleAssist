@@ -32,6 +32,7 @@ namespace AssembleAssist
 
         data shared_data_ext = null;
 
+        /*
         private const int CP_NOCLOSE_BUTTON = 0x200;
         protected override CreateParams CreateParams
         {
@@ -42,6 +43,7 @@ namespace AssembleAssist
                 return myCp;
             }
         }
+        */
 
         public load_bom_win(data shared_data_)
         {

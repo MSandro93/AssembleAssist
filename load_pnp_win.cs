@@ -34,7 +34,7 @@ namespace AssembleAssist
                                     "4. Select x and y coorinate column by selecting a cell and clicking particular button\"\n" +
                                     "5. Select a cell in the column that holds the board side and click \"select layer\". Specify the stings for top and bottom side in the appearing dialog.\n    Coordinates have to be absolute";
 
-
+        /*
         private const int CP_NOCLOSE_BUTTON = 0x200;
         protected override CreateParams CreateParams
         {
@@ -45,6 +45,7 @@ namespace AssembleAssist
                 return myCp;
             }
         }
+        */
 
         public load_pnp_win(data shared_data_)
         {
